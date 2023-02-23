@@ -750,3 +750,74 @@ addNumbers({
   }
 }
 ```
+
+- void 의 역할
+
+  - 값을 반환
+  - return 을 명시해주지 않은 것
+
+- arrow function
+
+```dart
+void main() {
+  int result = addNumbers(10, y: 20);
+}
+
+int addNumbers(int x, {
+  required int y,
+  int z = 30,
+}) => x + y + z;
+
+```
+
+- typedef
+
+```dart
+void main() {
+  Operation operation = add;
+
+  int result = operation(10, 20, 30);
+
+  print(result); // 60
+
+  operation = subtract;
+
+  int result2 = operation(10, 20, 30);
+
+  print(result2); // -40
+}
+
+// signature
+typedef Operation = int Function(int x, int y, int z);
+
+// 더하기
+int add(int x, int y, int z) => x + y + z;
+
+// 빼기
+int subtract(int x, int y, int z) => x - y - z;
+```
+
+- typedef 현실적인 사용법
+
+```dart
+void main() {
+  int result3 = calculate(30, 40, 50, add);
+
+  print(result3); // 120
+
+  int result4 = calculate(40, 50, 60, subtract);
+
+  print(result4); //-70
+}
+
+typedef Operation = int Function(int x, int y, int z);
+
+int add(int x, int y, int z) => x + y + z;
+
+int subtract(int x, int y, int z) => x - y - z;
+
+int calculate(int x, int y, int z, Operation operation) {
+  return operation(x, y, z)
+}
+
+```
